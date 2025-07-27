@@ -141,24 +141,24 @@ Route::middleware(['auth'])->group(function () {
     Route::post('library/queue', [\App\Http\Controllers\Api\LibraryManagerController::class, 'updateQueue']);
 
     // Social Reading API endpoints
-    Route::apiResource('social/book-clubs', \App\Http\Controllers\Api\SocialController::class);
-    Route::post('social/book-clubs/{club}/join', [\App\Http\Controllers\Api\SocialController::class, 'joinClub']);
-    Route::apiResource('social/reading-challenges', \App\Http\Controllers\Api\SocialController::class);
-    Route::post('social/reading-challenges/{challenge}/join', [\App\Http\Controllers\Api\SocialController::class, 'joinChallenge']);
-    Route::apiResource('social/highlights', \App\Http\Controllers\Api\SocialController::class);
-    Route::apiResource('social/discussions', \App\Http\Controllers\Api\SocialController::class);
-    Route::get('social/activity-feed', [\App\Http\Controllers\Api\SocialController::class, 'getActivityFeed']);
-    Route::get('social/friends-reading', [\App\Http\Controllers\Api\SocialController::class, 'getFriendsReading']);
-    Route::apiResource('social/reviews', \App\Http\Controllers\Api\SocialController::class);
-    Route::apiResource('social/reading-buddies', \App\Http\Controllers\Api\SocialController::class);
+    Route::apiResource('social/book-clubs', \App\Http\Controllers\BookClubController::class);
+    Route::post('social/book-clubs/{club}/join', [\App\Http\Controllers\BookClubController::class, 'joinClub']);
+    Route::apiResource('social/reading-challenges', \App\Http\Controllers\ReadingChallengeController::class);
+    Route::post('social/reading-challenges/{challenge}/join', [\App\Http\Controllers\ReadingChallengeController::class, 'joinChallenge']);
+    Route::apiResource('social/highlights', \App\Http\Controllers\SocialHighlightController::class);
+    Route::apiResource('social/discussions', \App\Http\Controllers\BookClubController::class);
+    Route::get('social/activity-feed', [\App\Http\Controllers\BookClubController::class, 'getActivityFeed']);
+    Route::get('social/friends-reading', [\App\Http\Controllers\BookClubController::class, 'getFriendsReading']);
+    Route::apiResource('social/reviews', \App\Http\Controllers\BookClubController::class);
+    Route::apiResource('social/reading-buddies', \App\Http\Controllers\BookClubController::class);
 
     // Extended Recommendation API endpoints
-    Route::get('recommendations/personalized', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'getPersonalized']);
-    Route::get('recommendations/similar/{book}', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'getSimilar']);
-    Route::get('recommendations/genre/{genre}', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'getByGenre']);
-    Route::get('recommendations/author/{author}', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'getByAuthor']);
-    Route::get('recommendations/mood/{mood}', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'getByMood']);
-    Route::post('recommendations/feedback', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'provideFeedback']);
+    Route::get('recommendations/personalized', [RecommendationController::class, 'getPersonalized']);
+    Route::get('recommendations/similar/{book}', [RecommendationController::class, 'getSimilar']);
+    Route::get('recommendations/genre/{genre}', [RecommendationController::class, 'getByGenre']);
+    Route::get('recommendations/author/{author}', [RecommendationController::class, 'getByAuthor']);
+    Route::get('recommendations/mood/{mood}', [RecommendationController::class, 'getByMood']);
+    Route::post('recommendations/feedback', [RecommendationController::class, 'provideFeedback']);
 
     // RBAC API endpoints
     Route::apiResource('roles', \App\Http\Controllers\Api\RoleController::class);
@@ -170,21 +170,4 @@ Route::middleware(['auth'])->group(function () {
 
     // Payment API endpoint
     Route::post('orders/{order}/pay', [\App\Http\Controllers\Api\PaymentController::class, 'process']);
-
-    // Social Reading API endpoints
-    Route::get('book-clubs', [\App\Http\Controllers\Api\SocialController::class, 'getBookClubs']);
-    Route::post('book-clubs', [\App\Http\Controllers\Api\SocialController::class, 'createBookClub']);
-    Route::post('book-clubs/{club}/join', [\App\Http\Controllers\Api\SocialController::class, 'joinClub']);
-    Route::get('reading-challenges', [\App\Http\Controllers\Api\SocialController::class, 'getReadingChallenges']);
-    Route::post('reading-challenges', [\App\Http\Controllers\Api\SocialController::class, 'createReadingChallenge']);
-    Route::post('reading-challenges/{challenge}/join', [\App\Http\Controllers\Api\SocialController::class, 'joinChallenge']);
-    Route::get('social-highlights', [\App\Http\Controllers\Api\SocialController::class, 'getSocialHighlights']);
-    Route::post('social-highlights', [\App\Http\Controllers\Api\SocialController::class, 'createSocialHighlight']);
-    Route::get('books/{bookId}/reviews', [\App\Http\Controllers\Api\SocialController::class, 'getBookReviews']);
-    Route::post('books/{bookId}/reviews', [\App\Http\Controllers\Api\SocialController::class, 'createBookReview']);
-    Route::get('books/{bookId}/discussions', [\App\Http\Controllers\Api\SocialController::class, 'getBookDiscussions']);
-    Route::post('books/{bookId}/discussions', [\App\Http\Controllers\Api\SocialController::class, 'createBookDiscussion']);
-    Route::get('activity-feed', [\App\Http\Controllers\Api\SocialController::class, 'getActivityFeed']);
-    Route::get('friends-reading', [\App\Http\Controllers\Api\SocialController::class, 'getFriendsReading']);
-    Route::get('reading-buddies', [\App\Http\Controllers\Api\SocialController::class, 'getReadingBuddies']);
 });
