@@ -170,4 +170,21 @@ Route::middleware(['auth'])->group(function () {
 
     // Payment API endpoint
     Route::post('orders/{order}/pay', [\App\Http\Controllers\Api\PaymentController::class, 'process']);
+
+    // Social Reading API endpoints
+    Route::get('book-clubs', [\App\Http\Controllers\Api\SocialController::class, 'getBookClubs']);
+    Route::post('book-clubs', [\App\Http\Controllers\Api\SocialController::class, 'createBookClub']);
+    Route::post('book-clubs/{club}/join', [\App\Http\Controllers\Api\SocialController::class, 'joinClub']);
+    Route::get('reading-challenges', [\App\Http\Controllers\Api\SocialController::class, 'getReadingChallenges']);
+    Route::post('reading-challenges', [\App\Http\Controllers\Api\SocialController::class, 'createReadingChallenge']);
+    Route::post('reading-challenges/{challenge}/join', [\App\Http\Controllers\Api\SocialController::class, 'joinChallenge']);
+    Route::get('social-highlights', [\App\Http\Controllers\Api\SocialController::class, 'getSocialHighlights']);
+    Route::post('social-highlights', [\App\Http\Controllers\Api\SocialController::class, 'createSocialHighlight']);
+    Route::get('books/{bookId}/reviews', [\App\Http\Controllers\Api\SocialController::class, 'getBookReviews']);
+    Route::post('books/{bookId}/reviews', [\App\Http\Controllers\Api\SocialController::class, 'createBookReview']);
+    Route::get('books/{bookId}/discussions', [\App\Http\Controllers\Api\SocialController::class, 'getBookDiscussions']);
+    Route::post('books/{bookId}/discussions', [\App\Http\Controllers\Api\SocialController::class, 'createBookDiscussion']);
+    Route::get('activity-feed', [\App\Http\Controllers\Api\SocialController::class, 'getActivityFeed']);
+    Route::get('friends-reading', [\App\Http\Controllers\Api\SocialController::class, 'getFriendsReading']);
+    Route::get('reading-buddies', [\App\Http\Controllers\Api\SocialController::class, 'getReadingBuddies']);
 });
