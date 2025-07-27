@@ -170,4 +170,45 @@ Route::middleware(['auth'])->group(function () {
 
     // Payment API endpoint
     Route::post('orders/{order}/pay', [\App\Http\Controllers\Api\PaymentController::class, 'process']);
+
+    // Gamification API endpoints
+    Route::get('achievements', [\App\Http\Controllers\GamificationController::class, 'getAchievements']);
+    Route::get('leaderboard', [\App\Http\Controllers\GamificationController::class, 'getLeaderboard']);
+    Route::get('reading-streak', [\App\Http\Controllers\GamificationController::class, 'getReadingStreak']);
+
+    // Advanced Search API endpoints
+    Route::post('search', [\App\Http\Controllers\AdvancedSearchController::class, 'search']);
+    Route::post('saved-searches', [\App\Http\Controllers\AdvancedSearchController::class, 'saveSearch']);
+    Route::get('saved-searches', [\App\Http\Controllers\AdvancedSearchController::class, 'getSavedSearches']);
+    Route::delete('saved-searches/{id}', [\App\Http\Controllers\AdvancedSearchController::class, 'deleteSavedSearch']);
+    Route::get('search-history', [\App\Http\Controllers\AdvancedSearchController::class, 'getSearchHistory']);
+
+    // Notification API endpoints
+    Route::get('notifications', [\App\Http\Controllers\NotificationController::class, 'getNotifications']);
+    Route::post('notifications/mark-as-read', [\App\Http\Controllers\NotificationController::class, 'markAsRead']);
+    Route::get('notification-settings', [\App\Http\Controllers\NotificationController::class, 'getSettings']);
+    Route::post('notification-settings', [\App\Http\Controllers\NotificationController::class, 'updateSettings']);
+
+    // Analytics API endpoints
+    Route::get('analytics/dashboard', [\App\Http\Controllers\AnalyticsController::class, 'getDashboardData']);
+    Route::get('analytics/revenue-charts', [\App\Http\Controllers\AnalyticsController::class, 'getRevenueCharts']);
+    Route::get('analytics/user-engagement', [\App\Http\Controllers\AnalyticsController::class, 'getUserEngagement']);
+    Route::get('analytics/book-performance', [\App\Http\Controllers\AnalyticsController::class, 'getBookPerformance']);
+    Route::get('analytics/real-time-metrics', [\App\Http\Controllers\AnalyticsController::class, 'getRealTimeMetrics']);
+
+    // Payment API endpoints
+    Route::get('subscription-plans', [\App\Http\Controllers\PaymentController::class, 'getSubscriptionPlans']);
+    Route::get('payment-methods', [\App\Http\Controllers\PaymentController::class, 'getPaymentMethods']);
+    Route::post('payment-methods', [\App\Http\Controllers\PaymentController::class, 'addPaymentMethod']);
+    Route::delete('payment-methods/{id}', [\App\Http\Controllers\PaymentController::class, 'deletePaymentMethod']);
+    Route::get('billing-history', [\App\Http\Controllers\PaymentController::class, 'getBillingHistory']);
+    Route::post('refund-requests', [\App\Http\Controllers\PaymentController::class, 'requestRefund']);
+
+    // Content Management API endpoints
+    Route::put('books/{id}', [\App\Http\Controllers\ContentController::class, 'updateBook']);
+    Route::post('content/upload', [\App\Http\Controllers\ContentController::class, 'uploadContent']);
+    Route::post('content/generate-preview', [\App\Http\Controllers\ContentController::class, 'generatePreview']);
+    Route::post('content/bulk-import', [\App\Http\Controllers\ContentController::class, 'bulkImport']);
+    Route::get('content/moderation-queue', [\App\Http\Controllers\ContentController::class, 'getContentModerationQueue']);
+    Route::get('author-portal', [\App\Http\Controllers\ContentController::class, 'getAuthorPortalData']);
 });
