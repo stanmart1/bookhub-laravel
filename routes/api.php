@@ -159,4 +159,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('recommendations/author/{author}', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'getByAuthor']);
     Route::get('recommendations/mood/{mood}', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'getByMood']);
     Route::post('recommendations/feedback', [\App\Http\Controllers\Api\ExtendedRecommendationController::class, 'provideFeedback']);
+
+    // RBAC API endpoints
+    Route::apiResource('roles', \App\Http\Controllers\Api\RoleController::class);
+    Route::post('roles/{role}/permissions', [\App\Http\Controllers\Api\RoleController::class, 'assignPermissions']);
+    Route::get('permissions', [\App\Http\Controllers\Api\RoleController::class, 'permissions']);
+
+    // Checkout API endpoint
+    Route::post('checkout', [\App\Http\Controllers\Api\CheckoutController::class, 'process']);
+
+    // Payment API endpoint
+    Route::post('orders/{order}/pay', [\App\Http\Controllers\Api\PaymentController::class, 'process']);
 });
